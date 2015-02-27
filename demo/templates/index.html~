@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" >
+    <!--link rel="stylesheet" href=""-->
+    <title>{% block title %}Author Book Details::{% endblock %}</title>
+  </head>
+
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+
+
+  <h3> {% block header %}Author and Book Details :: {% endblock  %}</h3>
+  <body>
+    <!-- blog body content -->
+    {% block content %}
+    parent page
+    {% endblock %}
+    <!-- end of body content -->
+    {% block footer %}
+    <hr>
+    <p>Thanks for visiting my site.</p>
+    {% endblock %}
+
+  </body>
+</html
