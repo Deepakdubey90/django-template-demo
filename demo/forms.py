@@ -4,17 +4,20 @@ from .models import (Book,
                      AuthorBook)
 from django.forms import ModelForm
 
-class BookForm(modelForm):
+class BookForm(ModelForm):
 
     class Meta:
         model = Book
+        exclude = []
 
-class AuthorForm(modelForm):
+class AuthorForm(ModelForm):
 
     class Meta:
         model = Author
+        exclude = []
 
-class AuthorBookForm(modelForm):
+class AuthorBookForm(ModelForm):
 
     class Meta:
         model = AuthorBook
+        exclude = []

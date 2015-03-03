@@ -1,9 +1,11 @@
 from django.db import models
+from django_extensions.db.fields import UUIDField
 
 
 class Book(models.Model):
     """  stores books details  """
-    id = models.BigIntegerField(primary_key=True)
+
+    id = UUIDField(primary_key=True)
     name = models.CharField(max_length=32)
     publish_date = models.DateField(null=True)
     price = models.CharField(max_length=20)
@@ -31,10 +33,10 @@ class Author(models.Model):
         ('Mg','Magzine')
     )
 
-    id = models.BigIntegerField(primary_key=True)
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
-    gender = models.CharField(max_length=100, choices = CATEGORY_CHOICES)
+    id = UUIDField(primary_key=True)
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    gender = models.CharField(max_length=50, choices = CATEGORY_CHOICES)
     published_books = models.CharField(max_length=200,choices = BOOK_CATEGORY, null=True)
     dob =models.DateField(null=True)
     marital_status =models.CharField(max_length=100, choices = MARITAL_STATUS, null=True, blank=True)
@@ -43,6 +45,6 @@ class Author(models.Model):
 class AuthorBook(models.Model):
     """ author and book details """
 
-    id = models.BigIntegerField(primary_key=True)
+    id = UUIDField(primary_key=True)
     book = models.ForeignKey(Book)
     author = models.ForeignKey(Author)
