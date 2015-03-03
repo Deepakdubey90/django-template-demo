@@ -3,21 +3,21 @@ from .models import (Book,
                      Author,
                      AuthorBook)
 from django.forms import ModelForm
+from uuid import uuid4
 
-class BookForm(ModelForm):
+
+class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        exclude = []
+        fields = ('name', 'publish_date', 'price', 'publication', )
 
-class AuthorForm(ModelForm):
+class AuthorForm(forms.ModelForm):
 
     class Meta:
         model = Author
-        exclude = []
 
-class AuthorBookForm(ModelForm):
+class AuthorBookForm(forms.ModelForm):
 
     class Meta:
         model = AuthorBook
-        exclude = []

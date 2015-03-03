@@ -24,12 +24,27 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+DATABASES = {}
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config(default='postgres://user:pass@host/db')
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = []
 
+STATIC_ROOT = 'staticfiles'
+
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
 # Application definition
 
 INSTALLED_APPS = (
+    'demo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +56,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -52,16 +67,10 @@ ROOT_URLCONF = 'demo.urls'
 
 WSGI_APPLICATION = 'demo.wsgi.application'
 
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__),'templates'), # creates a absolute path
+)
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

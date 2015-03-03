@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response
+from django.http import JsonResponse
 from django.template import Context, loader
 from django.http import HttpResponse
+from uuid import uuid4
 from .models import (Author,
                      Book,
                      AuthorBook)
@@ -44,26 +46,25 @@ def authorBookDetails(request):
         {'bc':'Magzine'}
     ]
     return render_to_response('author-book.html', locals())
+
+
+
+def postAuthorBookDetails(request):
+    """ save Author, Book details....... """
+
     print("This views get called!!!!!!!!!!")
     if request.method == 'POST':
         print("called inside post")
-        book_form = BookForm(instance=Book)
-        author_form = AuthorForm(instance=Author)
-        print("request value is ok ", request.POST)
-        print("you enter in post request kookokoko")
-        #if book_form.is_valid() or author_form.is_valid():
-        print("called inside if condition")
-        book_form.save()
-        author_form.save()
-        return HttpResponse("Success")
-        #else:
-        #return HttpResponse("Failure Occur..")
+        book_form = BookForm(request.POST)
+        print("request value is ok", request.POST)
+        print("Book Form data is", book_form)
+        if book_form.is_valid():
+            print("called inside if condition")
+            book_form.save()
+            response = JsonResponse({"status":"success"})
+            return HttpResponse(response)
+        else:
+            response = JsonResponse({"validation error":book_form.errors})
+            return HttpResponse(response)
     else:
-        #print("problems occurs!!!!!!!!!!!!!!!!!1111111")
-        #return HttpResponse("Failure")
         return HttpResponse("Some error occured!!!!!!!!")
-
-
-
-
-#def post(request):

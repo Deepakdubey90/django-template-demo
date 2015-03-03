@@ -24,7 +24,22 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+DATABASES = {}
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config(default='postgres://user:pass@host/db')
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = []
+
+STATIC_ROOT = 'staticfiles'
+
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
 # Application definition
 
@@ -56,19 +71,6 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__),'templates'), # creates a absolute path
 )
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'test1',
-        'USER': 'test1',
-        'PASSWORD': 'test1',
-        'HOST': '',
-        'PORT': '',
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
