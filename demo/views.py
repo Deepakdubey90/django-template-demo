@@ -22,31 +22,31 @@ def index(request):
         author_list = Author.objects.all()
         t = loader.get_template('book_collection.html')
         c = Context({'book_list': book_list, 'author_list': author_list, })
-    return HttpResponse(t.render(c))
+        return HttpResponse(t.render(c))
         #return render_to_response('author-book.html', locals())
 
 
 def authorBookDetails(request):
 
-    gender = [
-        {'id':'Male'},
-        {'id':'Female'},
-    ]
+    gender = {
+        'M':'Male',
+        'F':'Female'
+    }
 
-    MARITAL_STATUS = [
-        {'ms':'Single'},
-        {'ms':'Married'},
-        {'ms':'Other'}
-    ]
+    MARITAL_STATUS = {
+        'S':'Single',
+        'M':'Married',
+        'O':'Other'
+    }
 
-    BOOK_CATEGORY = [
-        {'bc':'Technical'},
-        {'bc':'Management'},
-        {'bc':'Story'},
-        {'bc':'Magzine'}
-    ]
+    BOOK_CATEGORY = {
+        'T':'Technical',
+        'M':'Management',
+        'S':'Story',
+        'Mg':'Magzine'
+    }
+
     return render_to_response('author-book.html', locals())
-
 
 
 def postAuthorBookDetails(request):
@@ -56,15 +56,25 @@ def postAuthorBookDetails(request):
     if request.method == 'POST':
         print("called inside post")
         book_form = BookForm(request.POST)
-        print("request value is ok", request.POST)
+        author_form = AuthorForm(request.POST)
+        print("\nbook_form data :::",book_form)
+        print("\nauthor_form data :::",author_form)
+        print("\nrequest value is ok", request.POST)
         print("Book Form data is", book_form)
         if book_form.is_valid():
             print("called inside if condition")
-            book_form.save()
-            response = JsonResponse({"status":"success"})
-            return HttpResponse(response)
+            book_form.save(commit=False)
+            if author_form.is_valid():
+                author_form.save()
+                book_form.save()
+                response = JsonResponse({"status":"success"})
+                return HttpResponse(response)
+            else:
+                response = JsonResponse({"author validation error":author_form.errors})
+                return HttpResponse(response)
+
         else:
-            response = JsonResponse({"validation error":book_form.errors})
+            response = JsonResponse({"Book validation error":book_form.errors})
             return HttpResponse(response)
     else:
         return HttpResponse("Some error occured!!!!!!!!")

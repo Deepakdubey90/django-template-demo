@@ -16,21 +16,21 @@ class Author(models.Model):
     """ store author details """
 
     CATEGORY_CHOICES = (
-        ('M','Male'),
-        ('F','Female'),
+        ('M','M'),
+        ('F','F'),
     )
 
     MARITAL_STATUS = (
-        ('S','Single'),
-        ('M','Married'),
-        ('O','Other')
+        ('S','S'),
+        ('M','M'),
+        ('O','O')
     )
 
     BOOK_CATEGORY =(
-        ('T','Technical'),
-        ('M','Management'),
-        ('S','Story'),
-        ('Mg','Magzine')
+        ('T','T'),
+        ('M','M'),
+        ('S','S'),
+        ('Mg','Mg')
     )
 
     id = UUIDField(primary_key=True)
