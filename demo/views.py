@@ -28,22 +28,22 @@ def index(request):
 
 def authorBookDetails(request):
 
-    gender = {
-        'M':'Male',
-        'F':'Female'
+    CATEGORY_CHOICES = {
+        'M':'M',
+        'F':'F'
     }
 
     MARITAL_STATUS = {
-        'S':'Single',
-        'M':'Married',
-        'O':'Other'
+        'S':'S',
+        'M':'M',
+        'O':'O'
     }
 
     BOOK_CATEGORY = {
-        'T':'Technical',
-        'M':'Management',
-        'S':'Story',
-        'Mg':'Magzine'
+        'T':'T',
+        'M':'M',
+        'S':'S',
+        'Mg':'M'
     }
 
     return render_to_response('author-book.html', locals())

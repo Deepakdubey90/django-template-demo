@@ -23,23 +23,23 @@ class Author(models.Model):
     MARITAL_STATUS = (
         ('S','S'),
         ('M','M'),
-        ('O','O')
+        ('O','O'),
     )
 
-    BOOK_CATEGORY =(
+    BOOK_CATEGORY = (
         ('T','T'),
         ('M','M'),
         ('S','S'),
-        ('Mg','Mg')
+        ('Mg','Mg'),
     )
 
     id = UUIDField(primary_key=True)
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
-    gender = models.CharField(max_length=50, choices = CATEGORY_CHOICES)
-    published_books = models.CharField(max_length=200,choices = BOOK_CATEGORY, null=True)
+    gender = models.CharField(max_length=2, choices = CATEGORY_CHOICES, default='M')
+    published_books = models.CharField(max_length=2, choices = BOOK_CATEGORY, null=True, default='T')
     dob =models.DateField(null=True)
-    marital_status =models.CharField(max_length=100, choices = MARITAL_STATUS, null=True, blank=True)
+    marital_status =models.CharField(max_length=2, choices = MARITAL_STATUS, null=True, blank=True, default='S')
 
 
 class AuthorBook(models.Model):

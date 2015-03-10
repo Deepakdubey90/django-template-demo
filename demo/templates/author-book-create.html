@@ -84,7 +84,7 @@
             <div class="col-md-12">
               <div class="drop-downdiv add-new">
                 <select name="gender" value="" type="text" class="form-control">
-                  {% for key, value in gender.items %}
+                  {% for key, value in CATEGORY_CHOICES.items %}
                   <option> {{value}}</option>
                   {% endfor %}
                 </select>
