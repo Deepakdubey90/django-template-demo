@@ -1,13 +1,14 @@
 import os
 import sys
 import waitress
+from demo.wsgi import get_wsgi_application
+
 
 BASE_DIR = os.path.join(os.path.dirname(__file__), 'demo')
 sys.path.append(BASE_DIR)
 
-from demo.wsgi import application
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "demo.settings")
+application = get_wsgi_application()
 
 waitress.serve(
     application,
