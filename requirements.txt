@@ -12,3 +12,4 @@ redis==2.10.3
 six==1.9.0
 whitenoise==1.0.6
 wsgiref==0.1.2
+dj-static==0.0.6
