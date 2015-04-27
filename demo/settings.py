@@ -30,7 +30,7 @@ DATABASES['default'] =  dj_database_url.config(default='postgres://user:pass@hos
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = 'staticfiles'
 
